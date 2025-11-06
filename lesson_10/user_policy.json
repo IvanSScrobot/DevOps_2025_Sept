@@ -63,6 +63,61 @@
                     ]
                 }
             }
+        },
+        {
+            "Sid": "AllowS3ForTerraformState",
+            "Effect": "Allow",
+            "Action": [
+                "s3:CreateBucket",
+                "s3:ListAllMyBuckets",
+                "s3:ListBucket",
+                "s3:GetBucketLocation",
+                "s3:PutBucketTagging",
+                "s3:PutBucketVersioning",
+                "s3:GetObject",
+                "s3:PutObject",
+                "s3:DeleteObject",
+                "s3:GetBucketAcl",
+                "s3:GetBucketCORS",
+                "s3:GetBucketWebsite",
+                "s3:GetBucketVersioning",
+                "s3:GetBucketPolicy",
+                "s3:GetAccelerateConfiguration",
+                "s3:GetBucketRequestPayment",
+                "s3:GetBucketLogging",
+                "s3:GetLifecycleConfiguration",
+                "s3:GetReplicationConfiguration",
+                "s3:GetEncryptionConfiguration",
+                "s3:GetLifecycleConfiguration",
+                "s3:GetBucketObjectLockConfiguration",
+                "s3:GetBucketTagging",
+                "s3:DeleteBucket",
+                "s3:PutEncryptionConfiguration",
+                "s3:PutBucketAcl"
+            ],
+            "Resource": [
+                "arn:aws:s3:::pasv-course-iskrobot-tf-state",
+                "arn:aws:s3:::pasv-course-iskrobot-tf-state/*"
+            ]
+        },
+        {
+            "Sid": "AllowDynamoDBForStateLocking",
+            "Effect": "Allow",
+            "Action": [
+                "dynamodb:CreateTable",
+                "dynamodb:DescribeTable",
+                "dynamodb:DeleteTable",
+                "dynamodb:ListTables",
+                "dynamodb:PutItem",
+                "dynamodb:GetItem",
+                "dynamodb:UpdateItem",
+                "dynamodb:DeleteItem",
+                "dynamodb:TagResource",
+                "dynamodb:DescribeContinuousBackups",
+                "dynamodb:DescribeTimeToLive",
+                "dynamodb:ListTagsOfResource"
+            ],
+            "Resource": "*"
         }
     ]
 }
