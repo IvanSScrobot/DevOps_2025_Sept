@@ -27,12 +27,14 @@ provider "aws" {
 locals {
   common_tags = {
     Environment = var.environment
-    Project     = "MyApplication"
+    Project     = "MyApplication_backend"
     ManagedBy   = "Terraform"
   }
 }
 
 resource "aws_instance" "test_t3_micro" {
+  count = var.number_of_instances
+
   ami                    = "ami-0bdd88bd06d16ba03" # Amazon Linux 2023
   instance_type          = "t3.micro"              # Free tier
   vpc_security_group_ids = [aws_security_group.web-sg.id]
@@ -63,9 +65,11 @@ resource "aws_instance" "test_t3_micro" {
   tags = merge(
     local.common_tags,
     {
-      Name = "HelloWorld Server"
+      Name = "HelloWorld Server-$(count.index)"
     }
   )
+
+  depends_on = [aws_security_group.web-sg]
 }
 
 resource "random_pet" "sg" {}
@@ -89,10 +93,10 @@ resource "aws_security_group" "web-sg" {
 
 output "instance_public_ip" {
   description = "The public IP address of the EC2 instance"
-  value       = aws_instance.test_t3_micro.public_ip
+  value       = [for instance in aws_instance.test_t3_micro : instance.public_ip]
 }
 
 output "instance_public_dns" {
   description = "The public DNS of the EC2 instance"
-  value       = aws_instance.test_t3_micro.public_dns
+  value       = [for instance in aws_instance.test_t3_micro : instance.public_dns]
 }

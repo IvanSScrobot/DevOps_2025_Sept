@@ -9,3 +9,8 @@ variable "environment" {
   type        = string
   default     = "dev"
 }
+
+variable "number_of_instances" {
+  description = "Number of EC2 instances to create"
+  type        = number
+}
