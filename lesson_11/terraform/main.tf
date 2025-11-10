@@ -100,3 +100,14 @@ output "instance_public_dns" {
   description = "The public DNS of the EC2 instance"
   value       = [for instance in aws_instance.test_t3_micro : instance.public_dns]
 }
+
+
+data "aws_ami" "amazon_linux" {
+  most_recent = true
+  owners      = ["amazon"]
+
+  filter {
+    name   = "name"
+    values = ["amzn2-ami-hvm-*-x86_64-gp2"]
+  }
+}
