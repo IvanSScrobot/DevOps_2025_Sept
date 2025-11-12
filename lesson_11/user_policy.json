@@ -92,11 +92,14 @@
                 "s3:GetBucketObjectLockConfiguration",
                 "s3:GetBucketTagging",
                 "s3:DeleteBucket",
-                "s3:PutEncryptionConfiguration"
+                "s3:PutEncryptionConfiguration",
+                "s3:PutBucketAcl",
+                "s3:PutObjectTagging"
             ],
             "Resource": [
-                "arn:aws:s3:::pasv-course-iskrobot-tf-state",
-                "arn:aws:s3:::pasv-course-iskrobot-tf-state/*"
+                "*",
+                "arn:aws:s3:::pasv-course-iskrobot-tf-state*",
+                "arn:aws:s3:::pasv-course-iskrobot-tf-state*/*"
             ]
         },
         {
@@ -115,6 +118,29 @@
                 "dynamodb:DescribeContinuousBackups",
                 "dynamodb:DescribeTimeToLive",
                 "dynamodb:ListTagsOfResource"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "ssm:GetParameter"
+            ],
+            "Resource": "arn:aws:ssm:*:*:parameter/aws/service/ami-amazon-linux-latest/*"
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "ssm:GetParameters",
+                "ssm:DescribeParameters"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "iam:CreatePolicy",
+                "iam:CreateRole"
             ],
             "Resource": "*"
         }
