@@ -1,0 +1,20 @@
+---
+- name: Install Apache web server on web nodes
+  hosts: web
+  become: yes
+
+  tasks:
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+
+    - name: Install Ngnx
+      apt:
+        name: nginx
+        state: present
+
+    - name: Enable and start Nginx service
+      service:
+        name: nginx
+        state: started
+        enabled: yes
