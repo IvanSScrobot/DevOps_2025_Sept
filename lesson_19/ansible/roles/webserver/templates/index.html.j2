@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Custom Web Page</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 2rem; background: #f8f9fa; color: #222; }
+    header { margin-bottom: 1.5rem; }
+    h1 { margin: 0 0 0.5rem 0; }
+    .card { background: #fff; padding: 1.5rem; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.08); }
+    .muted { color: #666; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Hello {{ ansible_fqdn }}!</h1>
+    <p class="muted">Welcome to your web server deployed by Ansible.</p>
+  </header>
+  <div class="card">
+    <p><strong>Host:</strong> {{ inventory_hostname }}</p>
+    <p><strong>IP:</strong> {{ ansible_default_ipv4.address | default(ansible_all_ipv4_addresses[0] | default('unknown')) }}</p>
+  </div>
+</body>
+</html>

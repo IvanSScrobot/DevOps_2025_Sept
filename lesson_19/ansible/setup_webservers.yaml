@@ -1,0 +1,8 @@
+- name: Configure web servers (Ubuntu only)
+  hosts: web
+  become: yes
+  vars:
+      webserver_port: 80
+  roles:
+    - webserver
+    

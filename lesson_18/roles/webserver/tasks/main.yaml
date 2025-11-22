@@ -1,0 +1,48 @@
+---
+- name: Ensure this role runs only on Ubuntu
+  ansible.builtin.assert:
+    that:
+      - ansible_facts['distribution'] == "Ubuntu"
+    fail_msg: "This role supports only Ubuntu. Got: {{ ansible_facts['distribution'] }}"
+    success_msg: "Ubuntu detected, continuing."
+  tags: always
+
+- name: Install web server package
+  ansible.builtin.apt:
+    name: "{{ webserver_package }}"
+    state: present
+    update_cache: yes
+  when: ansible_facts['distribution'] == "Ubuntu"
+
+- name: Deploy virtual host configuration from template
+  ansible.builtin.template:
+    src: vhost.conf.j2
+    dest: /etc/apache2/sites-available/000-default.conf
+    owner: root
+    group: root
+    mode: "0644"
+  notify: restart webserver
+  when: ansible_facts['distribution'] == "Ubuntu"
+
+- name: Create index.html page
+  ansible.builtin.copy:
+    dest: "{{ webserver_doc_root }}/index.html"
+    content: |
+      <html>
+      <head><title>Student Web Server</title></head>
+      <body>
+        <h1>Hello from Ansible!</h1>
+        <p>This page is served by {{ webserver_package }} on host {{ inventory_hostname }}.</p>
+      </body>
+      </html>
+    owner: root
+    group: root
+    mode: "0644"
+  when: ansible_facts['distribution'] == "Ubuntu"
+
+- name: Ensure web server service is enabled and running
+  ansible.builtin.service:
+    name: "{{ webserver_service }}"
+    state: started
+    enabled: yes
+  when: ansible_facts['distribution'] == "Ubuntu"

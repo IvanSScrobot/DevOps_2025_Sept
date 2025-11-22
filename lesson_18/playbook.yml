@@ -1,0 +1,7 @@
+---
+- name: Configure web servers (Ubuntu only)
+  hosts: web
+  become: yes
+
+  roles:
+    - webserver

@@ -1,0 +1,34 @@
+# 1. install webserver packages
+# 2. configure
+# 3. start service
+
+- name: Update apt cache
+  apt:
+    update_cache: yes
+
+- name: Install webserver package
+  apt:
+    name: apache2
+    state: present
+
+- name: Deploy virtual host configuration from template
+  # ansible.builtin.template:
+  ansible.builtin.template:
+    src: vhost.conf.j2
+    dest: /etc/apache2/sites-available/000-default.conf
+    owner: root
+    group: root
+    mode: "0644"
+  notify: restart webserver
+  # when: ansible_facts['distribution'] == "Ubuntu"
+
+- name: Deploy custom index page with host IP and greeting
+  ansible.builtin.template:
+    src: index.html.j2
+    dest: "/var/www/html/index.html"
+    owner: root
+    group: root
+    mode: "0644"
+  notify: restart webserver
+  # when: ansible_facts['distribution'] == "Ubuntu"
+  

@@ -1,0 +1,9 @@
+---
+webserver_package: apache2
+webserver_service: apache2
+
+webserver_port: 8080
+webserver_doc_root: /var/www/html
+webserver_server_name: "example.local"
+webserver_server_admin: "webmaster@example.local"
+webserver_guest_name: "Guest"
