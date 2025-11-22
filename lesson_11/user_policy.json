@@ -68,6 +68,7 @@
             "Sid": "AllowS3ForTerraformState",
             "Effect": "Allow",
             "Action": [
+                "s3:*",
                 "s3:CreateBucket",
                 "s3:ListAllMyBuckets",
                 "s3:ListBucket",
@@ -94,7 +95,9 @@
                 "s3:DeleteBucket",
                 "s3:PutEncryptionConfiguration",
                 "s3:PutBucketAcl",
-                "s3:PutObjectTagging"
+                "s3:PutObjectTagging",
+                "s3:GetObjectTagging",
+                "s3:PutBucketNotification"
             ],
             "Resource": [
                 "*",
@@ -126,7 +129,7 @@
             "Action": [
                 "ssm:GetParameter"
             ],
-            "Resource": "arn:aws:ssm:*:*:parameter/aws/service/ami-amazon-linux-latest/*"
+            "Resource": "*"
         },
         {
             "Effect": "Allow",
@@ -140,7 +143,48 @@
             "Effect": "Allow",
             "Action": [
                 "iam:CreatePolicy",
-                "iam:CreateRole"
+                "iam:CreateRole",
+                "iam:TagPolicy",
+                "iam:TagRole",
+                "iam:GetPolicy",
+                "iam:GetRole",
+                "iam:GetPolicyVersion",
+                "iam:ListRolePolicies",
+                "iam:ListAttachedRolePolicies",
+                "iam:ListInstanceProfilesForRole",
+                "iam:ListPolicyVersions",
+                "iam:DeleteRole",
+                "iam:DeletePolicy",
+                "iam:AttachRolePolicy",
+                "iam:CreateInstanceProfile",
+                "iam:GetInstanceProfile",
+                "iam:DeleteInstanceProfile",
+                "iam:DeleteInstanceProfile",
+                "iam:PassRole",
+                "iam:TagInstanceProfile",
+                "iam:AddRoleToInstanceProfile",
+                "iam:*"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "lambda:*",
+                "lambda:CreateFunction",
+                "lambda:UpdateFunction*",
+                "lambda:DeleteFunction",
+                "lambda:GetFunction*",
+                "lambda:List*",
+                "lambda:PublishVersion",
+                "lambda:CreateAlias",
+                "lambda:UpdateAlias",
+                "lambda:DeleteAlias",
+                "lambda:AddPermission",
+                "lambda:RemovePermission",
+                "lambda:TagResource",
+                "lambda:UntagResource",
+                "lambda:GetPolicy"
             ],
             "Resource": "*"
         }
