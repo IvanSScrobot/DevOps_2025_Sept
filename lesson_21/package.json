@@ -1,0 +1,8 @@
+{
+    "name": "lesson20",
+    "version": "1.0.0",
+    "description": "Lesson 20 package.json example",
+    "dependencies": {
+        "express": "^4.18.2"
+    }
+}

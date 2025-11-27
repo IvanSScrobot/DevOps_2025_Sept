@@ -22,6 +22,15 @@
   notify: restart webserver
   # when: ansible_facts['distribution'] == "Ubuntu"
 
+- name: Copy image to the remote host
+  ansible.builtin.copy:
+    src: Ansible_Red_Hat_Logo.png
+    dest: /var/www/html/Ansible_Red_Hat_Logo.png
+    owner: root
+    group: root
+    mode: "0644"
+  # when: ansible_facts['distribution'] == "Ubuntu"
+
 - name: Deploy custom index page with host IP and greeting
   ansible.builtin.template:
     src: index.html.j2

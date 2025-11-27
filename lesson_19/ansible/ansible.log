@@ -2408,3 +2408,96 @@ Nov 22 03:27:17 ip-172-31-68-90 systemd[1]: Started The Apache HTTP Server.
 2025-11-21 20:09:14,790 p=2753377 u=ivan n=ansible INFO| PLAY RECAP ************************************************************************************************************************
 2025-11-21 20:09:14,796 p=2753377 u=ivan n=ansible INFO| web1                       : ok=6    changed=3    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
 2025-11-21 20:09:14,798 p=2753377 u=ivan n=ansible INFO| web2                       : ok=6    changed=3    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+2025-11-24 19:38:33,245 p=1012096 u=ivan n=ansible ERROR| [ERROR]: Task failed: Failed to connect to the host via ssh: ubuntu@34.204.169.152: Permission denied (publickey).
+Origin: <adhoc 'ping' task>
+
+{'action': 'ping', 'args': {}, 'timeout': 0, 'async_val': 0, 'poll': 15}
+
+
+2025-11-24 19:38:33,256 p=1012096 u=ivan n=ansible INFO| web2 | UNREACHABLE! => {
+    "changed": false,
+    "msg": "Task failed: Failed to connect to the host via ssh: ubuntu@34.204.169.152: Permission denied (publickey).",
+    "unreachable": true
+}
+2025-11-24 19:38:33,276 p=1012096 u=ivan n=ansible ERROR| [ERROR]: Task failed: Failed to connect to the host via ssh: Warning: Permanently added '44.197.230.63' (ED25519) to the list of known hosts.
+ubuntu@44.197.230.63: Permission denied (publickey).
+Origin: <adhoc 'ping' task>
+
+{'action': 'ping', 'args': {}, 'timeout': 0, 'async_val': 0, 'poll': 15}
+
+
+2025-11-24 19:38:33,277 p=1012096 u=ivan n=ansible INFO| db1 | UNREACHABLE! => {
+    "changed": false,
+    "msg": "Task failed: Failed to connect to the host via ssh: Warning: Permanently added '44.197.230.63' (ED25519) to the list of known hosts.\r\nubuntu@44.197.230.63: Permission denied (publickey).",
+    "unreachable": true
+}
+2025-11-24 19:38:33,339 p=1012096 u=ivan n=ansible ERROR| [ERROR]: Task failed: Failed to connect to the host via ssh: ubuntu@44.222.62.2: Permission denied (publickey).
+Origin: <adhoc 'ping' task>
+
+{'action': 'ping', 'args': {}, 'timeout': 0, 'async_val': 0, 'poll': 15}
+
+
+2025-11-24 19:38:33,342 p=1012096 u=ivan n=ansible INFO| web1 | UNREACHABLE! => {
+    "changed": false,
+    "msg": "Task failed: Failed to connect to the host via ssh: ubuntu@44.222.62.2: Permission denied (publickey).",
+    "unreachable": true
+}
+2025-11-24 19:54:35,675 p=1017622 u=ivan n=ansible INFO| ansible-playbook [core 2.19.4]
+  config file = /home/ivan/Documents/PASV/src/DevOps_2025_Sept/lesson_19/ansible/ansible.cfg
+  configured module search path = ['/home/ivan/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+  ansible python module location = /home/ivan/Documents/PASV/src/DevOps_2025_Sept/.venv-ansible/lib/python3.12/site-packages/ansible
+  ansible collection location = /home/ivan/.ansible/collections:/usr/share/ansible/collections
+  executable location = /home/ivan/Documents/PASV/src/DevOps_2025_Sept/.venv-ansible/bin/ansible-playbook
+  python version = 3.12.3 (main, Aug 14 2025, 17:47:21) [GCC 13.3.0] (/home/ivan/Documents/PASV/src/DevOps_2025_Sept/.venv-ansible/bin/python3)
+  jinja version = 3.1.6
+  pyyaml version = 6.0.3 (with libyaml v0.2.5)
+2025-11-24 19:54:35,676 p=1017622 u=ivan n=ansible INFO| Using /home/ivan/Documents/PASV/src/DevOps_2025_Sept/lesson_19/ansible/ansible.cfg as config file
+2025-11-24 19:54:35,677 p=1017622 u=ivan n=ansible INFO| setting up inventory plugins
+2025-11-24 19:54:35,947 p=1017622 u=ivan n=ansible INFO| Loading collection ansible.builtin from 
+2025-11-24 19:54:35,997 p=1017622 u=ivan n=ansible INFO| host_list declined parsing /home/ivan/Documents/PASV/src/DevOps_2025_Sept/lesson_19/ansible/inventory.ini as it did not pass its verify_file() method
+2025-11-24 19:54:35,997 p=1017622 u=ivan n=ansible INFO| script declined parsing /home/ivan/Documents/PASV/src/DevOps_2025_Sept/lesson_19/ansible/inventory.ini as it did not pass its verify_file() method
+2025-11-24 19:54:35,997 p=1017622 u=ivan n=ansible INFO| auto declined parsing /home/ivan/Documents/PASV/src/DevOps_2025_Sept/lesson_19/ansible/inventory.ini as it did not pass its verify_file() method
+2025-11-24 19:54:35,998 p=1017622 u=ivan n=ansible INFO| yaml declined parsing /home/ivan/Documents/PASV/src/DevOps_2025_Sept/lesson_19/ansible/inventory.ini as it did not pass its verify_file() method
+2025-11-24 19:54:36,002 p=1017622 u=ivan n=ansible INFO| Parsed /home/ivan/Documents/PASV/src/DevOps_2025_Sept/lesson_19/ansible/inventory.ini inventory source with ini plugin
+2025-11-24 19:54:36,292 p=1017622 u=ivan n=ansible INFO| Loading callback plugin default of type stdout, v2.0 from /home/ivan/Documents/PASV/src/DevOps_2025_Sept/.venv-ansible/lib/python3.12/site-packages/ansible/plugins/callback/default.py
+2025-11-24 19:54:36,344 p=1017622 u=ivan n=ansible INFO| Skipping callback 'minimal', as we already have a stdout callback.
+2025-11-24 19:54:36,344 p=1017622 u=ivan n=ansible INFO| Skipping callback 'oneline', as we already have a stdout callback.
+2025-11-24 19:54:36,345 p=1017622 u=ivan n=ansible INFO| PLAYBOOK: setup_webservers.yaml *******************************************************************************************************************************************************
+2025-11-24 19:54:36,345 p=1017622 u=ivan n=ansible INFO| 1 plays in ./setup_webservers.yaml
+2025-11-24 19:54:36,352 p=1017622 u=ivan n=ansible INFO| PLAY [Configure web servers (Ubuntu only)] ********************************************************************************************************************************************
+2025-11-24 19:54:36,385 p=1017622 u=ivan n=ansible INFO| TASK [Gathering Facts] ****************************************************************************************************************************************************************
+2025-11-24 19:54:36,386 p=1017622 u=ivan n=ansible INFO| task path: /home/ivan/Documents/PASV/src/DevOps_2025_Sept/lesson_19/ansible/setup_webservers.yaml:1
+2025-11-24 19:54:36,429 p=1017622 u=ivan n=ansible INFO| <44.222.62.2> ESTABLISH SSH CONNECTION FOR USER: ubuntu
+2025-11-24 19:54:36,433 p=1017622 u=ivan n=ansible INFO| <44.222.62.2> SSH: EXEC ssh -o IdentitiesOnly=yes -o StrictHostKeyChecking=no -o 'IdentityFile="/home/ivan/Documents/PASV/src/DevOps_2025_Sept/lesson_19/ansible/ansible3.pem"' -o KbdInteractiveAuthentication=no -o PreferredAuthentications=gssapi-with-mic,gssapi-keyex,hostbased,publickey -o PasswordAuthentication=no -o 'User="ubuntu"' -o ConnectTimeout=10 -o NumberOfPasswordPrompts=1 44.222.62.2 '/bin/sh -c '"'"'echo ~ubuntu && sleep 0'"'"''
+2025-11-24 19:54:36,463 p=1017622 u=ivan n=ansible INFO| <34.204.169.152> ESTABLISH SSH CONNECTION FOR USER: ubuntu
+2025-11-24 19:54:36,465 p=1017622 u=ivan n=ansible INFO| <34.204.169.152> SSH: EXEC ssh -o IdentitiesOnly=yes -o StrictHostKeyChecking=no -o 'IdentityFile="/home/ivan/Documents/PASV/src/DevOps_2025_Sept/lesson_19/ansible/ansible3.pem"' -o KbdInteractiveAuthentication=no -o PreferredAuthentications=gssapi-with-mic,gssapi-keyex,hostbased,publickey -o PasswordAuthentication=no -o 'User="ubuntu"' -o ConnectTimeout=10 -o NumberOfPasswordPrompts=1 34.204.169.152 '/bin/sh -c '"'"'echo ~ubuntu && sleep 0'"'"''
+2025-11-24 19:54:37,598 p=1017622 u=ivan n=ansible INFO| <34.204.169.152> (255, b'', b'ubuntu@34.204.169.152: Permission denied (publickey).\r\n')
+2025-11-24 19:54:37,606 p=1017622 u=ivan n=ansible ERROR| [ERROR]: Task failed: Failed to connect to the host via ssh: ubuntu@34.204.169.152: Permission denied (publickey).
+
+2025-11-24 19:54:37,609 p=1017622 u=ivan n=ansible INFO| fatal: [web2]: UNREACHABLE! => {
+    "changed": false,
+    "msg": "Task failed: Failed to connect to the host via ssh: ubuntu@34.204.169.152: Permission denied (publickey).",
+    "unreachable": true
+}
+2025-11-24 19:54:37,651 p=1017622 u=ivan n=ansible INFO| <44.222.62.2> (255, b'', b'ubuntu@44.222.62.2: Permission denied (publickey).\r\n')
+2025-11-24 19:54:37,662 p=1017622 u=ivan n=ansible ERROR| [ERROR]: Task failed: Failed to connect to the host via ssh: ubuntu@44.222.62.2: Permission denied (publickey).
+
+2025-11-24 19:54:37,663 p=1017622 u=ivan n=ansible INFO| fatal: [web1]: UNREACHABLE! => {
+    "changed": false,
+    "msg": "Task failed: Failed to connect to the host via ssh: ubuntu@44.222.62.2: Permission denied (publickey).",
+    "unreachable": true
+}
+2025-11-24 19:54:37,666 p=1017622 u=ivan n=ansible INFO| PLAY RECAP ****************************************************************************************************************************************************************************
+2025-11-24 19:54:37,666 p=1017622 u=ivan n=ansible INFO| web1                       : ok=0    changed=0    unreachable=1    failed=0    skipped=0    rescued=0    ignored=0   
+2025-11-24 19:54:37,667 p=1017622 u=ivan n=ansible INFO| web2                       : ok=0    changed=0    unreachable=1    failed=0    skipped=0    rescued=0    ignored=0   
+2025-11-24 19:54:49,065 p=1017752 u=ivan n=ansible INFO| PLAY [Configure web servers (Ubuntu only)] ***************************************************************************************************************************************************
+2025-11-24 19:54:49,080 p=1017752 u=ivan n=ansible INFO| TASK [Gathering Facts] ***********************************************************************************************************************************************************************
+2025-11-24 19:54:50,192 p=1017752 u=ivan n=ansible ERROR| [ERROR]: Task failed: Failed to connect to the host via ssh: ubuntu@34.204.169.152: Permission denied (publickey).
+
+2025-11-24 19:54:50,194 p=1017752 u=ivan n=ansible INFO| fatal: [web2]: UNREACHABLE! => {"changed": false, "msg": "Task failed: Failed to connect to the host via ssh: ubuntu@34.204.169.152: Permission denied (publickey).", "unreachable": true}
+2025-11-24 19:54:50,213 p=1017752 u=ivan n=ansible ERROR| [ERROR]: Task failed: Failed to connect to the host via ssh: ubuntu@44.222.62.2: Permission denied (publickey).
+
+2025-11-24 19:54:50,214 p=1017752 u=ivan n=ansible INFO| fatal: [web1]: UNREACHABLE! => {"changed": false, "msg": "Task failed: Failed to connect to the host via ssh: ubuntu@44.222.62.2: Permission denied (publickey).", "unreachable": true}
+2025-11-24 19:54:50,215 p=1017752 u=ivan n=ansible INFO| PLAY RECAP ***********************************************************************************************************************************************************************************
+2025-11-24 19:54:50,216 p=1017752 u=ivan n=ansible INFO| web1                       : ok=0    changed=0    unreachable=1    failed=0    skipped=0    rescued=0    ignored=0   
+2025-11-24 19:54:50,216 p=1017752 u=ivan n=ansible INFO| web2                       : ok=0    changed=0    unreachable=1    failed=0    skipped=0    rescued=0    ignored=0   
