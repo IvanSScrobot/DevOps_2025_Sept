@@ -8,7 +8,7 @@ WORKDIR /app
 COPY . .
 
 # Compile the Go application to a static binary named 'main'
-# RUN go build -o main .
+RUN go build -o main .
 
 # --- Stage 2: Create the minimal runtime image ---
 FROM alpine:latest AS final
