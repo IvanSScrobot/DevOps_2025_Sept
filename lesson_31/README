@@ -1,0 +1,11 @@
+1. Enable addon in minikube:
+   
+```
+minikube start
+minikube addons enable ingress
+```
+
+2. Check that ingress controller is up and running
+```
+kubectl get pods -n ingress-nginx
+```
