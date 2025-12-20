@@ -1,0 +1,107 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: coffee
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: frontend-content
+  namespace: coffee
+data:
+  index.html: |
+    <!doctype html>
+    <html>
+      <head>
+        <meta charset="utf-8" />
+        <title>Coffee Shop UI</title>
+        <style>
+          body { font-family: sans-serif; margin: 2rem; }
+          code, pre { background: #f4f4f4; padding: 0.75rem; display: block; overflow: auto; }
+          button { padding: 0.5rem 1rem; cursor: pointer; }
+        </style>
+      </head>
+      <body>
+        <h1>☕ Coffee Shop</h1>
+        <p>This is the <b>frontend</b> (nginx). It calls the <b>backend</b> via <code>/api</code> through the Ingress.</p>
+
+        <button id="btn">Call /api</button>
+        <pre id="out">Click the button to call the backend...</pre>
+
+        <script src="/app.js"></script>
+      </body>
+    </html>
+  app.js: |
+    const out = document.getElementById("out");
+    document.getElementById("btn").addEventListener("click", async () => {
+      out.textContent = "Calling /api ...";
+      try {
+        const res = await fetch("/api");
+        const text = await res.text();
+        out.textContent = text;
+      } catch (e) {
+        out.textContent = "Error calling /api: " + e;
+      }
+    });
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+  namespace: coffee
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:1.27-alpine
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - name: web
+              mountPath: /usr/share/nginx/html
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 3
+            periodSeconds: 5
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          resources:
+            requests:
+              cpu: 25m
+              memory: 32Mi
+            limits:
+              cpu: 150m
+              memory: 96Mi
+      volumes:
+        - name: web
+          configMap:
+            name: frontend-content
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend-svc
+  namespace: coffee
+spec:
+  selector:
+    app: frontend
+  ports:
+    - name: http
+      port: 80
+      targetPort: 80
+  type: ClusterIP
