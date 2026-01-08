@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web
+  namespace: cm-secret-demo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: web
+  template:
+    metadata:
+      labels:
+        app: web
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:1.27
+          ports:
+            - containerPort: 80
+
+          # Show env var injection (from both ConfigMap + Secret)
+          envFrom:
+            - configMapRef:
+                name: app-config
+            - secretRef:
+                name: mysql-secret
+
+          # Mount ConfigMap as a real file (index.html)
+          volumeMounts:
+            - name: web-content
+              mountPath: /usr/share/nginx/html/index.html
+              subPath: index.html
+
+            # Mount TLS secret as files
+            - name: web-tls
+              mountPath: /etc/tls
+              readOnly: true
+
+      volumes:
+        - name: web-content
+          configMap:
+            name: web-content
+        - name: web-tls
+          secret:
+            secretName: web-tls

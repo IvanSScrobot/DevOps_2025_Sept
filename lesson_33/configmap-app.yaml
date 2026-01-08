@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config
+  namespace: cm-secret-demo
+data:
+  MYSQL_DATABASE: demo_db
+  DEMO_GREETING: "Hello from ConfigMap"
