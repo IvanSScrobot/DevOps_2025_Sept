@@ -1,0 +1,27 @@
+replicaCount: 1
+
+image:
+  repository: nginx
+  tag: "1.27"
+  pullPolicy: IfNotPresent
+
+service:
+  type: NodePort
+  port: 80
+  targetPort: 80
+  nodePort: null
+
+page:
+  title: "Hello from Helm"
+  subtitle: "Default (base values.yaml)"
+  envName: "base"
+
+  # NEW: theme knobs
+  bannerText: "BASE"
+  accentColor: "#444"
+  backgroundColor: "#f7f7f7"
+
+ingress:
+  enabled: false
+  host: hello.local
+  path: /

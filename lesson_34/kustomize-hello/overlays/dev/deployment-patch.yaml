@@ -1,0 +1,13 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kustomize-hello
+spec:
+  replicas: 1
+  template:
+    spec:
+      containers:
+        - name: app
+          args:
+            - "-listen=:5678"
+            - "-text=Hello from Kustomize DEV"

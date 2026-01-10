@@ -1,0 +1,13 @@
+replicaCount: 2
+
+service:
+  nodePort: 30082
+
+page:
+  title: "Hello from Helm"
+  subtitle: "STAGING environment"
+  envName: "staging"
+
+  bannerText: "STAGING"
+  accentColor: "#198754" # green
+  backgroundColor: "#e9f7ef" # light green

@@ -1,0 +1,19 @@
+{{- $ing := .Values.ingress | default dict -}}
+{{- if ($ing.enabled | default false) }}
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ include "helm-hello.fullname" . }}
+spec:
+  rules:
+    - host: {{ $ing.host | default "hello.local" }}
+      http:
+        paths:
+          - path: {{ $ing.path | default "/" }}
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ include "helm-hello.fullname" . }}
+                port:
+                  number: {{ .Values.service.port }}
+{{- end }}

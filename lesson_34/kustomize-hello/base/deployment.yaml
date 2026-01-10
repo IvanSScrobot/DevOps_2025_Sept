@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kustomize-hello
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kustomize-hello
+  template:
+    metadata:
+      labels:
+        app: kustomize-hello
+    spec:
+      containers:
+        - name: app
+          image: hashicorp/http-echo:1.0
+          args:
+            - "-listen=:5678"
+            - "-text=Hello from Kustomize (base)"
+          ports:
+            - containerPort: 5678

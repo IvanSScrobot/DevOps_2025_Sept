@@ -1,0 +1,13 @@
+replicaCount: 1
+
+service:
+  nodePort: 30081
+
+page:
+  title: "Hello from Helm"
+  subtitle: "TEST environment"
+  envName: "test"
+
+  bannerText: "TEST"
+  accentColor: "#0b6efd" # blue
+  backgroundColor: "#e7f1ff" # light blue

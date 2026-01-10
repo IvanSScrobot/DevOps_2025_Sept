@@ -1,0 +1,51 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "helm-hello.fullname" . }}-html
+data:
+  index.html: |
+    <!doctype html>
+    <html>
+      <head>
+        <meta charset="utf-8" />
+        <title>{{ .Values.page.title }} ({{ .Values.page.envName }})</title>
+        <style>
+          body {
+            font-family: Arial, sans-serif;
+            background: {{ .Values.page.backgroundColor }};
+            margin: 0;
+            padding: 0;
+          }
+          .banner {
+            background: {{ .Values.page.accentColor }};
+            color: white;
+            padding: 18px 24px;
+            font-size: 22px;
+            font-weight: bold;
+            letter-spacing: 1px;
+          }
+          .card {
+            background: white;
+            margin: 24px;
+            padding: 18px 24px;
+            border-radius: 12px;
+            border: 2px solid {{ .Values.page.accentColor }};
+          }
+          .muted { color: #666; }
+          .kv { margin: 6px 0; }
+          code { background: #f2f2f2; padding: 2px 6px; border-radius: 6px; }
+        </style>
+      </head>
+      <body>
+        <div class="banner">{{ .Values.page.bannerText }}</div>
+
+        <div class="card">
+          <h1 style="margin-top:0">{{ .Values.page.title }}</h1>
+          <h2 class="muted">{{ .Values.page.subtitle }}</h2>
+
+          <div class="kv"><b>Environment:</b> <code>{{ .Values.page.envName }}</code></div>
+          <div class="kv"><b>Release:</b> <code>{{ .Release.Name }}</code></div>
+          <div class="kv"><b>Namespace:</b> <code>{{ .Release.Namespace }}</code></div>
+        </div>
+      </body>
+    </html>
